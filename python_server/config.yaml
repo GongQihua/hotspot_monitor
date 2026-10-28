@@ -1,0 +1,26 @@
+# 固定抓取时间（本地时间，HH:MM）。默认每 8 小时一次。
+# 注意：改这里只影响抓取；当天 CSV 的导出时间由 export_time 控制。
+run_times:
+  - "00:00"
+  - "08:00"
+  - "16:00"
+
+# 每天汇总导出当天 CSV 的时间（本地时间，HH:MM）
+export_time: "23:50"
+
+# 启用的数据源与每个源最多抓取条数。
+# 以后新增源：在 app/sources/ 下实现后，把名字加到这里即可。
+sources:
+  weibo: 50
+  bilibili: 50
+  zhihu: 50
+
+ai:
+  model: deepseek-chat
+  batch_size: 20       # 每次请求分析多少条，越大越省钱，但失败重试成本更高
+  timeout: 60          # 秒
+  retries: 3           # 首次之外的重试次数
+  max_tokens: 2600
+
+network:
+  timeout: 15          # 单个数据源请求超时（秒）
